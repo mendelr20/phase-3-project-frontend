@@ -23,24 +23,12 @@ export default function NavBar(){
       </div>
       <div class="ui animated fade button" tabindex="0">
         <div class="visible content">
-          <i class="user md icon"></i>
+          <i class="book icon"></i>
         </div>
         <div class="hidden content">
-          <NavLink to="/Nurses">Nurses</NavLink>
+          <NavLink to="/Books">Books</NavLink>
         </div>
       </div>
-      {/* <a class="item">
-        <i class="home icon"></i>
-        <NavLink to="/">Home</NavLink>
-      </a>
-      <a class="item">        
-        <i class="info circle icon"></i>
-        <NavLink to="/About">About</NavLink>
-      </a>
-      <a class="item">
-        <i class="user md icon"></i>
-        <NavLink to="/Nurses">Nurses</NavLink>
-      </a> */}
     </div>
   )
 }

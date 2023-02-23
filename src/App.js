@@ -1,48 +1,21 @@
 import React, { useEffect, useState } from "react";
 import {Route, Switch } from "react-router-dom";
-import "semantic-ui-css/semantic.min.css"
+
 import './App.css';
 import Header from './Header';
 import NavBar from "./NavBar";
 import Home from "./Home";
 import About from "./About";
-import Nurses from "./Nurses";
-import NewNurse from "./NewNurse";
+import Books from "./Books";
 
 export default function App() {
-  const [nurseList, setNurseList] = useState([])
+  const [bookList, setBookList] = useState([])
 
-  function addNurse(newNurse){
-    setNurseList([...nurseList, newNurse])
-  }
-  
-  function updateVoteState(nurse) {
-    const index = nurseList.findIndex(nur => nurse.id === nur.id)
-    const updatedNurseList = [...nurseList.slice(0, index), nurse, ...nurseList.slice(index + 1),]
-
-    setNurseList(updatedNurseList)
-}
-  
   useEffect(()=>{
-    fetch('http://localhost:3000/nurses')
+    fetch('http://localhost:9292/books')
     .then(res => res.json())
-    .then(data => setNurseList(data))
+    .then(data => setBookList(data))
   },[])
-  
-
-  function addLike(nurse){
-      fetch(`http://localhost:3000/nurses/${nurse.id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          "likes": nurse.likes + 1,
-        }),
-      })
-        .then((r) => r.json())
-        .then((nurse) => updateVoteState(nurse));
-  }
   
   return (
     <div className="App">
@@ -52,12 +25,9 @@ export default function App() {
           <Route exact path="/About">
             <About />
           </Route>
-          <Route exact path="/Nurses">
-            <Nurses nurseList={nurseList} addLike={addLike}/>
+          <Route exact path="/Books">
+            <Books bookList={bookList} />
           </Route> 
-          <Route exact path="/NewNurse">
-            <NewNurse addNurse={addNurse}/>
-          </Route>
           <Route exact path="/">
             <Home />
           </Route>
