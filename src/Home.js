@@ -8,7 +8,7 @@ export default function Home() {
           <i class="home icon"></i>
           Home
         </h1>
-        <h2>Welcome to the Nursing Specialty Application</h2>
+        <h2>Welcome to the Entertainment Tracker</h2>
         <br/>
         <br/>
         <br/>

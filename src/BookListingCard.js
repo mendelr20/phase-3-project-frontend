@@ -1,6 +1,25 @@
-import React from 'react'
+import React, {useState} from 'react'
 
 export default function BookListingCard({book}) {
+  const [mendelCheckBox, setMendelChecked] = useState(book.read_by_mendel);
+  const [shainaCheckBox, setShainaChecked] = useState(book.read_by_shaina);
+  // patch request
+  // console.log("console", mendelCheckBox)
+  function handleMendelPatch(e){
+    console.log("handlem", e)
+  }
+  function handleShainaPatch(e){
+    console.log("handles", e)
+  }
+  const handleMendelCheckboxChange = (event) => {
+    setMendelChecked(event.target.checked);
+    handleMendelPatch(mendelCheckBox)
+  };
+
+  const handleShainaCheckboxChange = (event) => {
+    setShainaChecked(event.target.checked);
+    handleShainaPatch(shainaCheckBox)
+  };
 
   return (
     <div>
@@ -14,10 +33,10 @@ export default function BookListingCard({book}) {
             <div>
             Notes: {book.notes}
             </div>
-            <div>Read by Mendel: {book.read_by_mendel ? <a>True</a> : <a>False</a>}
+            <div>Read by Mendel:  <input type="checkbox" checked={mendelCheckBox} onChange={handleMendelCheckboxChange} />
             </div>
             <div>
-            Read by Shaina: {book.read_by_shaina ? <a>True</a> : <a>False</a>}
+            Read by Shaina: <input type="checkbox" checked={shainaCheckBox} onChange={handleShainaCheckboxChange}/>
             </div>
           </div>
         </div>
