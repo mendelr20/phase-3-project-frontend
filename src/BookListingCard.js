@@ -20,7 +20,10 @@ export default function BookListingCard({book}) {
     setShainaChecked(event.target.checked);
     handleShainaPatch(shainaCheckBox)
   };
-
+  
+  function handleDelete(){
+    alert('hey there')
+  }
   return (
     <div>
         <div class="ui card" key={book.id}>
@@ -40,6 +43,7 @@ export default function BookListingCard({book}) {
             Read by Shaina: <input type="checkbox" checked={shainaCheckBox} onChange={handleShainaCheckboxChange}/>
             </div>
           </div>
+          <button onClick={handleDelete} class="right floated ">Delete</button>
         </div>
     </div>
     
