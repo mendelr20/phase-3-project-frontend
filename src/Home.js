@@ -19,7 +19,7 @@ export default function Home() {
           <br/>
           <br/>
             <h5>
-              <i class="user icon"></i>
+              <i class="github icon"></i>
               <a href='https://github.com/mendelr20'>Mendel Rosenblum</a>
               <br/>
               <br/>

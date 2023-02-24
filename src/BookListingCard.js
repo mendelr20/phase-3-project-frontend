@@ -4,12 +4,12 @@ export default function BookListingCard({book}) {
   const [mendelCheckBox, setMendelChecked] = useState(book.read_by_mendel);
   const [shainaCheckBox, setShainaChecked] = useState(book.read_by_shaina);
   // patch request
-  // console.log("console", mendelCheckBox)
+ 
   function handleMendelPatch(e){
-    console.log("handlem", e)
+    alert("You need to set up a patch request :)")
   }
   function handleShainaPatch(e){
-    console.log("handles", e)
+    alert("i will patch you")
   }
   const handleMendelCheckboxChange = (event) => {
     setMendelChecked(event.target.checked);
@@ -24,6 +24,7 @@ export default function BookListingCard({book}) {
   function handleDelete(){
     alert('hey there')
   }
+
   return (
     <div>
         <div class="ui card" key={book.id}>
@@ -43,10 +44,13 @@ export default function BookListingCard({book}) {
             Read by Shaina: <input type="checkbox" checked={shainaCheckBox} onChange={handleShainaCheckboxChange}/>
             </div>
           </div>
-          <button onClick={handleDelete} class="right floated ">Delete</button>
+          <button onClick={handleDelete} class="ui icon button">
+            <i class="trash icon"></i>
+          </button>
         </div>
     </div>
     
   )
 }
 
+<i class="trash icon"></i>
