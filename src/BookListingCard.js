@@ -33,7 +33,8 @@ export default function BookListingCard({book}) {
             <div>
             Notes: {book.notes}
             </div>
-            <div>Read by Mendel:  <input type="checkbox" checked={mendelCheckBox} onChange={handleMendelCheckboxChange} />
+            <div>
+              Read by Mendel:  <input type="checkbox" checked={mendelCheckBox} onChange={handleMendelCheckboxChange} />
             </div>
             <div>
             Read by Shaina: <input type="checkbox" checked={shainaCheckBox} onChange={handleShainaCheckboxChange}/>
