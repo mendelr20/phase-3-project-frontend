@@ -11,7 +11,10 @@ import NewBook from "./NewBook";
 import Authors from "./Authors";
 
 export default function App() {
+
   const [bookList, setBookList] = useState([])
+  const [authorId, setAuthorId] = useState(null)
+  const [authorIdList, setAuthorIdList] = useState([])
   const [authorList, setAuthorList] = useState([])
 
   useEffect(()=>{
@@ -19,18 +22,29 @@ export default function App() {
     .then(res => res.json())
     .then(data => setBookList(data))
   },[])
-
+  
   useEffect(()=>{
-    fetch('http://localhost:9292/authors')
+    fetch(`http://localhost:9292/authors`)
     .then(res => res.json())
     .then(data => setAuthorList(data))
   },[])
-  
+
+  useEffect(()=>{
+    fetch(`http://localhost:9292/authors/${authorId}`)
+    .then(res => res.json())
+    .then(data => setAuthorIdList(data))
+  },[authorId])
+
   function addBook(newBook){
     setBookList([...bookList, newBook])
   } 
 
-  console.log("app", authorList)
+  function onAuthorIdChange(newAuthorId) {
+    setAuthorId(newAuthorId);
+  }
+  
+  console.log("authorList", authorList)
+  console.log("authorIdList", authorIdList)
   return (
     <div className="App">
       <Header />
@@ -40,13 +54,13 @@ export default function App() {
             <About />
           </Route>
           <Route exact path="/Books">
-            <Books bookList={bookList}  authorList={authorList} addBook={addBook}/>
+            <Books bookList={bookList}/>
           </Route> 
           <Route exact path="/NewBook">
             <NewBook addBook={addBook}  authorList={authorList} />
           </Route>
           <Route exact path="/authors/:authorId">
-            <Authors authorList={authorList}/>
+            <Authors onAuthorIdChange={onAuthorIdChange} authorIdList={authorIdList}/>
           </Route>
           <Route exact path="/">
             <Home />

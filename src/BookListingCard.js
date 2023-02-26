@@ -24,7 +24,7 @@ export default function BookListingCard({book}) {
   function handleDelete(){
     alert('hey there')
   }
-
+  
   return (
     <div>
         <div class="ui card" key={book.id}>
@@ -52,4 +52,4 @@ export default function BookListingCard({book}) {
   )
 }
 
-<i class="trash icon"></i>
+

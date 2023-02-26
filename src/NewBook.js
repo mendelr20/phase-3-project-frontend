@@ -1,23 +1,22 @@
 
 import React, { useState } from "react";
 import {useHistory } from "react-router-dom";
-import { Checkbox } from "semantic-ui-react";
 
 export default function NewBook({authorList}) {
   const [bookName, setBookName] = useState("");
   const [seriesName, setSeriesName] = useState("");
   //set up state / post ot create author ...
-  const [selectedAuthor, setSelectedAuthor] = useState({ id: '', name: '' });// just author_id - if want to create a author need to have a option to create a author to create a author
+  const [selectedAuthor, setSelectedAuthor] = useState({ id: '', name: '' });    // just author_id - if want to create a author need to have a option to create a author to create a author
   const [note, setNote] = useState("");
   const [readByMendel, setReadByMendel] = useState(false)
   const [readByShaina, setReadByShaina] = useState(false)
   let history = useHistory();
-// add link to author name to go to author page with all the books and include all books for the authoer if add book to author yoou have to add state for books and authors
+// add link to author name to go to author page with all the books and include all books for the author if add book to author you have to add state for books and authors
   const handleAuthorChange = (event) => {
     const author = authorList.find((author) => author.name === event.target.value);
     setSelectedAuthor({ id: author.id, name: author.name });
   };
-console.log(authorList)
+
   const authorOptions = authorList.map((author) => (
     <option key={author.id} id={author.id} value={author.name}>
       {author.name}
@@ -28,6 +27,7 @@ console.log(authorList)
     alert("I Have Been Submited")
     history.push("/Books");
   }
+
   return (
     <div>
       <h1>New Book Form</h1>
