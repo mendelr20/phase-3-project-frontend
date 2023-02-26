@@ -1,10 +1,10 @@
 import React, {useState} from 'react'
+import { NavLink } from "react-router-dom";
 
 export default function BookListingCard({book}) {
   const [mendelCheckBox, setMendelChecked] = useState(book.read_by_mendel);
   const [shainaCheckBox, setShainaChecked] = useState(book.read_by_shaina);
-  // patch request
- 
+
   function handleMendelPatch(e){
     alert("You need to set up a patch request :)")
   }
@@ -33,7 +33,7 @@ export default function BookListingCard({book}) {
             <div class="description">
               Series: {book.series}
             </div>
-            Author: {book.author.name}
+              Author: <NavLink to={`/authors/${book.author.id}`}>{book.author.name}</NavLink>
             <div>
             Notes: {book.notes}
             </div>
@@ -48,8 +48,7 @@ export default function BookListingCard({book}) {
             <i class="trash icon"></i>
           </button>
         </div>
-    </div>
-    
+    </div> 
   )
 }
 

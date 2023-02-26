@@ -12,7 +12,7 @@ export default function Books({bookList}){
                 <NavLink to="/NewBook">New Book</NavLink>
             </button>
             <p></p>
-            <BookListingsContainer bookList={bookList}/>
+            <BookListingsContainer bookList={bookList}/ >
         </div>
     )
 }
