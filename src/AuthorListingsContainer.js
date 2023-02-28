@@ -3,10 +3,13 @@ import AuthorBookListingCard from './AuthorBookListingCard'
 
 export default function AuthorListingsContainer({authorIdList})  {
 
-    
+ let matchingAuthor = authorIdList.books
+  console.log("matching author", matchingAuthor)
+  //need to get the map working again and not slow and only working sometimes
+
   return (
     <div className='ui cards'>
-        {authorIdList.books.map((book) => <AuthorBookListingCard book={book} />)}
+        {/* {matchingAuthor.map((book) => <AuthorBookListingCard book={book} />)} */}
     </div>
   )
 }

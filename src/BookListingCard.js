@@ -1,28 +1,50 @@
 import React, {useState} from 'react'
 import { NavLink } from "react-router-dom";
 
-export default function BookListingCard({book}) {
+export default function BookListingCard({book, deleteCallback}) {
+  console.log("reading state", book.read_by_mendel)
   const [mendelCheckBox, setMendelChecked] = useState(book.read_by_mendel);
   const [shainaCheckBox, setShainaChecked] = useState(book.read_by_shaina);
 
-  function handleMendelPatch(e){
-    alert("You need to set up a patch request :)")
+  console.log("inital state",mendelCheckBox)
+
+  function handlePatch(){
+    console.log("before patch", book.read_by_mendel)
+    fetch(`http://localhost:9292/books/${book.id}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      "read_by_mendel": mendelCheckBox,
+      "read_by_shaina": shainaCheckBox
+    })
+  })
+  .then(res => res.json())
+  .then(updatedBook => console.log(updatedBook))
+  .catch(error => {
+    console.error('Error updating book:', error);
+  });
   }
-  function handleShainaPatch(e){
-    alert("i will patch you")
-  }
-  const handleMendelCheckboxChange = (event) => {
-    setMendelChecked(event.target.checked);
-    handleMendelPatch(mendelCheckBox)
+
+  function handleMendelCheckboxChange(event){
+    console.log("before", book.read_by_mendel)
+    setMendelChecked(event.target.checked, handlePatch);
+    console.log("after", book.read_by_mendel)
+   
   };
 
-  const handleShainaCheckboxChange = (event) => {
-    setShainaChecked(event.target.checked);
-    handleShainaPatch(shainaCheckBox)
+  console.log(book.read_by_mendel)
+  console.log(book)
+
+  function handleShainaCheckboxChange(event){
+    console.log("before shaina", book.read_by_shaina)
+    setShainaChecked(event.target.checked, handlePatch);
+    console.log("after shaina", book.read_by_shaina)
   };
   
   function handleDelete(){
-    alert('hey there')
+    deleteCallback(book.id)
   }
   
   return (

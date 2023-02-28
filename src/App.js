@@ -30,19 +30,34 @@ export default function App() {
   },[])
 
   useEffect(()=>{
-    fetch(`http://localhost:9292/authors/${authorId}`)
-    .then(res => res.json())
-    .then(data => setAuthorIdList(data))
+    if (authorId) {
+      fetch(`http://localhost:9292/authors/${authorId}`)
+      .then(res => res.json())
+      .then(data => setAuthorIdList(data))
+    }
   },[authorId])
 
+  function deleteCallback(id){
+    console.log(id)
+    fetch(`http://localhost:9292/books/${id}`, {
+      method: 'DELETE',
+    })
+    .then(res => res.json())
+    .then(data => {
+      const filteredBooks = bookList.filter(book => book.id !== id);
+      setBookList(filteredBooks);
+    })
+  }
+  
   function addBook(newBook){
     setBookList([...bookList, newBook])
   } 
 
   function onAuthorIdChange(newAuthorId) {
     setAuthorId(newAuthorId);
+    console.log("in change", authorId)
   }
-  
+
   console.log("authorList", authorList)
   console.log("authorIdList", authorIdList)
   return (
@@ -54,7 +69,7 @@ export default function App() {
             <About />
           </Route>
           <Route exact path="/Books">
-            <Books bookList={bookList}/>
+            <Books bookList={bookList} deleteCallback={deleteCallback}/>
           </Route> 
           <Route exact path="/NewBook">
             <NewBook addBook={addBook}  authorList={authorList} />

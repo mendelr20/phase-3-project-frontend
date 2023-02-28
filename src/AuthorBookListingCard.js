@@ -1,9 +1,12 @@
 import React from "react";
 
 export default function AuthorBookListingCard({book}){
+    console.log("Author Book Card", book)
     return(
         <div>
-            {book.name}
+            <div>
+                {book.name}, 
+            </div>
         </div>
     )
 }

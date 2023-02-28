@@ -1,13 +1,16 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { useParams } from 'react-router-dom';
 import AuthorListingsContainer from './AuthorListingsContainer';
 
 export default function Authors({onAuthorIdChange, authorIdList}) {
-    const { authorId } = useParams();
+    let { authorId } = useParams();
+    
+    let newAuthorId = authorId
+    console.log("Author Id from params", Number(authorId))
 
-    React.useEffect(() => {
-        onAuthorIdChange(Number(authorId));
-      }, [authorId, onAuthorIdChange]);
+  useEffect(() => {
+        onAuthorIdChange(Number(newAuthorId));
+      },[newAuthorId, onAuthorIdChange]);
     
     return (
         <div>
