@@ -7,7 +7,7 @@ export default function NewBook({authorList}) {
   const [seriesName, setSeriesName] = useState("");
   const [isNewAuthor, setIsNewAuthor] = useState(false);
   const [newAuthorName, setNewAuthorName] = useState('');
-  const [selectedAuthor, setSelectedAuthor] = useState(null);    // just author_id - if want to create a author need to have a option to create a author to create a author
+  const [selectedAuthor, setSelectedAuthor] = useState();    // just author_id - if want to create a author need to have a option to create a author to create a author
   const [note, setNote] = useState("");
   const [readByMendel, setReadByMendel] = useState(false)
   const [readByShaina, setReadByShaina] = useState(false)
@@ -30,7 +30,7 @@ const bookData = {
     } else {
       setIsNewAuthor(false);
       const author = authorList.find((author) => author.name === event.target.value);
-      setSelectedAuthor({ id: author.id });
+      setSelectedAuthor(author.id);
     }
   };
 
