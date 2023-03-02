@@ -6,42 +6,44 @@ export default function BookListingCard({book, deleteCallback}) {
   const [mendelCheckBox, setMendelChecked] = useState(book.read_by_mendel);
   const [shainaCheckBox, setShainaChecked] = useState(book.read_by_shaina);
 
-  console.log("inital state",mendelCheckBox)
-
-  function handlePatch(){
-    console.log("before patch", book.read_by_mendel)
-    fetch(`http://localhost:9292/books/${book.id}`, {
-    method: 'PATCH',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      "read_by_mendel": mendelCheckBox,
-      "read_by_shaina": shainaCheckBox
-    })
-  })
-  .then(res => res.json())
-  .then(updatedBook => console.log(updatedBook))
-  .catch(error => {
-    console.error('Error updating book:', error);
-  });
-  }
-
   function handleMendelCheckboxChange(event){
-    console.log("before", book.read_by_mendel)
-    setMendelChecked(event.target.checked, handlePatch);
-    console.log("after", book.read_by_mendel)
-   
+    const newCheckedState = event.target.checked;
+    setMendelChecked(newCheckedState);
+    setShainaChecked(shainaCheckBox);
+    fetch(`http://localhost:9292/books/${book.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        read_by_mendel: newCheckedState,
+        read_by_shaina: shainaCheckBox 
+      }),
+    })
+      .then((r) => r.json())
+      .then((updatedMessage) => console.log(updatedMessage));
   };
 
   console.log(book.read_by_mendel)
   console.log(book)
 
-  function handleShainaCheckboxChange(event){
-    console.log("before shaina", book.read_by_shaina)
-    setShainaChecked(event.target.checked, handlePatch);
-    console.log("after shaina", book.read_by_shaina)
-  };
+  function handleShainaCheckboxChange(event) {
+  const newCheckedState = event.target.checked;
+  setShainaChecked(newCheckedState); // update shainaCheckBox state
+
+  fetch(`http://localhost:9292/books/${book.id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      read_by_mendel: mendelCheckBox,
+      read_by_shaina: newCheckedState,
+    }),
+  })
+    .then((r) => r.json())
+    .then((updatedMessage) => console.log(updatedMessage));
+};
   
   function handleDelete(){
     deleteCallback(book.id)
