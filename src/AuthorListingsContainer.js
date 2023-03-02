@@ -6,7 +6,7 @@ export default function AuthorListingsContainer({ authorIdList }) {
     <div className="ui cards">
       <h1>
         {authorIdList?.books?.map((book) => (
-          <AuthorBookListingCard book={book} />
+          <AuthorBookListingCard book={book}/>
         ))}
       </h1>
     </div>
