@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import {Route, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
-import './App.css';
-import Header from './Header';
+import "./App.css";
+import Header from "./Header";
 import NavBar from "./NavBar";
 import Home from "./Home";
 import About from "./About";
@@ -11,47 +11,46 @@ import NewBook from "./NewBook";
 import Authors from "./Authors";
 
 export default function App() {
+  const [bookList, setBookList] = useState([]);
+  const [authorId, setAuthorId] = useState(null);
+  const [authorIdList, setAuthorIdList] = useState([]);
+  const [authorList, setAuthorList] = useState([]);
 
-  const [bookList, setBookList] = useState([])
-  const [authorId, setAuthorId] = useState(null)
-  const [authorIdList, setAuthorIdList] = useState([])
-  const [authorList, setAuthorList] = useState([])
+  useEffect(() => {
+    fetch("http://localhost:9292/books")
+      .then((res) => res.json())
+      .then((data) => setBookList(data));
+  }, []);
 
-  useEffect(()=>{
-    fetch('http://localhost:9292/books')
-    .then(res => res.json())
-    .then(data => setBookList(data))
-  },[])
-  
-  useEffect(()=>{
+  useEffect(() => {
     fetch(`http://localhost:9292/authors`)
-    .then(res => res.json())
-    .then(data => setAuthorList(data))
-  },[])
+      .then((res) => res.json())
+      .then((data) => setAuthorList(data));
+  }, []);
 
-  useEffect(()=>{
+  useEffect(() => {
     if (authorId) {
       fetch(`http://localhost:9292/authors/${authorId}`)
-      .then(res => res.json())
-      .then(data => setAuthorIdList(data))
+        .then((res) => res.json())
+        .then((data) => setAuthorIdList(data));
     }
-  },[authorId])
+  }, [authorId]);
 
-  function deleteCallback(id){
-    console.log(id)
+  function deleteCallback(id) {
+    console.log(id);
     fetch(`http://localhost:9292/books/${id}`, {
-      method: 'DELETE',
+      method: "DELETE",
     })
-    .then(res => res.json())
-    .then(data => {
-      const filteredBooks = bookList.filter(book => book.id !== id);
-      setBookList(filteredBooks);
-    })
+      .then((res) => res.json())
+      .then((data) => {
+        const filteredBooks = bookList.filter((book) => book.id !== id);
+        setBookList(filteredBooks);
+      });
   }
-  
-  function addBook(newBook){
-    setBookList([...bookList, newBook])
-  } 
+
+  function addBook(newBook) {
+    setBookList([...bookList, newBook]);
+  }
 
   function onAuthorIdChange(newAuthorId) {
     setAuthorId(newAuthorId);
@@ -61,26 +60,26 @@ export default function App() {
     <div className="App">
       <Header />
       <NavBar />
-        <Switch>
-          <Route exact path="/About">
-            <About />
-          </Route>
-          <Route exact path="/Books">
-            <Books bookList={bookList} deleteCallback={deleteCallback}/>
-          </Route> 
-          <Route exact path="/NewBook">
-            <NewBook addBook={addBook}  authorList={authorList} />
-          </Route>
-          <Route exact path="/authors/:authorId">
-            <Authors onAuthorIdChange={onAuthorIdChange} authorIdList={authorIdList}/>
-          </Route>
-          <Route exact path="/">
-            <Home />
-          </Route>
-        </Switch>
+      <Switch>
+        <Route exact path="/About">
+          <About />
+        </Route>
+        <Route exact path="/Books">
+          <Books bookList={bookList} deleteCallback={deleteCallback} />
+        </Route>
+        <Route exact path="/NewBook">
+          <NewBook addBook={addBook} authorList={authorList} />
+        </Route>
+        <Route exact path="/authors/:authorId">
+          <Authors
+            onAuthorIdChange={onAuthorIdChange}
+            authorIdList={authorIdList}
+          />
+        </Route>
+        <Route exact path="/">
+          <Home />
+        </Route>
+      </Switch>
     </div>
   );
 }
-
-
-
