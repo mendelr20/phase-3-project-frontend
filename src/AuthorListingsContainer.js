@@ -1,18 +1,14 @@
-import React from 'react'
-import AuthorBookListingCard from './AuthorBookListingCard'
+import React from "react";
+import AuthorBookListingCard from "./AuthorBookListingCard";
 
-export default function AuthorListingsContainer({authorIdList})  {
-
-    console.log("author id list", authorIdList)
-
-    
+export default function AuthorListingsContainer({ authorIdList }) {
   return (
-    <div className='ui cards'>
+    <div className="ui cards">
       <h1>
-           {authorIdList.books.map((book) => <AuthorBookListingCard book={book} />)}
+        {authorIdList?.books?.map((book) => (
+          <AuthorBookListingCard book={book} />
+        ))}
       </h1>
-       
     </div>
-  )
+  );
 }
-
