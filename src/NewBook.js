@@ -13,15 +13,6 @@ export default function NewBook({authorList}) {
   const [readByShaina, setReadByShaina] = useState(false)
   let history = useHistory();
 // add link to author name to go to author page with all the books and include all books for the author if add book to author you have to add state for books and authors
-
-const bookData = {
-    "name": bookName,
-    "series": seriesName,
-    "author_id": selectedAuthor,
-    "notes": note,
-    "read_by_mendel": readByMendel,
-    "read_by_shaina": readByShaina,
-  }
   
   function handleAuthorSelection(event){
     const selectedOption = event.target.value;
@@ -45,11 +36,69 @@ const bookData = {
   };
 
   
-  function handleSubmit(){
-    alert("I Have Been Submited")
-    history.push("/Books");
-    console.log(bookData)
+  function handleSubmit() {
+    if (isNewAuthor) {
+      // Make a POST request to create a new author
+      fetch('http://localhost:9292/authors', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ name: newAuthorName })
+      })
+      .then(response => response.json())
+      .then(data => {
+        // Set the newly created author's ID as the selected author ID
+        setSelectedAuthor(data.id);
+        
+        // Make a POST request to create a new book with the selected author ID
+        fetch('http://localhost:9292/books', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            name: bookName,
+            series: seriesName,
+            author_id: data.id,
+            notes: note,
+            read_by_mendel: readByMendel,
+            read_by_shaina: readByShaina
+          })
+        })
+        .then(response => response.json())
+        .then(data => {
+          alert("Book created successfully!");
+          history.push("/Books");
+          console.log(data);
+        })
+      })
+
+    } else {
+      // Make a POST request to create a new book with the selected author ID
+      fetch('http://localhost:9292/books', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: bookName,
+          series: seriesName,
+          author_id: selectedAuthor,
+          notes: note,
+          read_by_mendel: readByMendel,
+          read_by_shaina: readByShaina
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        alert("Book created successfully!");
+        history.push("/Books");
+        console.log(data);
+      })
+    }
   }
+  
 
   return (
     <div>

@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import { NavLink } from "react-router-dom";
 
 export default function BookListingCard({book, deleteCallback}) {
-  console.log("reading state", book.read_by_mendel)
+ 
   const [mendelCheckBox, setMendelChecked] = useState(book.read_by_mendel);
   const [shainaCheckBox, setShainaChecked] = useState(book.read_by_shaina);
 
@@ -23,9 +23,6 @@ export default function BookListingCard({book, deleteCallback}) {
       .then((r) => r.json())
       .then((updatedMessage) => console.log(updatedMessage));
   };
-
-  console.log(book.read_by_mendel)
-  console.log(book)
 
   function handleShainaCheckboxChange(event) {
   const newCheckedState = event.target.checked;
