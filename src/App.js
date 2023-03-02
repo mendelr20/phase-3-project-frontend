@@ -55,11 +55,8 @@ export default function App() {
 
   function onAuthorIdChange(newAuthorId) {
     setAuthorId(newAuthorId);
-    console.log("in change", authorId)
   }
 
-  console.log("authorList", authorList)
-  console.log("authorIdList", authorIdList)
   return (
     <div className="App">
       <Header />
