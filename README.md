@@ -3,9 +3,7 @@
 Front End Link: https://github.com/mendelr20/phase-3-project-frontend
 Back End Link: https://github.com/mendelr20/phase-3-sinatra-react-project
 ## Description
-<!-- This project is a JavaScript application built with React framework and styled with Semantic-UI that displays a list of commonly found Nurses and their average salary in the USA. Upon opening the application, users will be brought to the home page which displays the landing page and contact information with clickable links. The name link leads to the Github profile, the email link auto-starts an email, and the phone number link auto-dials the number. The application also includes an About page with information on the inspiration and reasoning behind its creation.
-
-The Nurses page displays a list of Nurses retrieved from a JSON server running in the background. Each Nurse in the list is clickable and users can increase the like count for each Nurse by clicking the like button. There is also a form for adding new Nurses, which starts with a like count of 0 and is added to the end of the list. -->
+I am thrilled to introduce my phase 3 web application, designed as a tribute to my beloved wife Shaina, who has a penchant for reading and being organized. This app has been specifically created to keep track of books, movies, and TV shows that we plan to read and watch, as well as the ones we have already enjoyed. At present, the application can only manage books, but we plan to incorporate movies and TV shows in the future. The app showcases a comprehensive list of all the books that we have entered into the system. Clicking on an author's name displays a page that lists all the books written by that author. Moreover, the books page provides a button that allows users to create a new book, which includes fields for the title, series name (if applicable), an author selection from a list, or the option to add a new author, notes, and a checkbox that indicates if the book has been read by Mendel or Shaina.
 <br />
 
 ## Contributors
