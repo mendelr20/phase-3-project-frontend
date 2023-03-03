@@ -10,6 +10,7 @@ export default function Home() {
       <h2>Welcome to the Entertainment Tracker</h2>
       <br />
       <br />
+      <i class="massive book icon"/>
       <br />
       <br />
       <h3>

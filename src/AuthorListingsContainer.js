@@ -3,12 +3,12 @@ import AuthorBookListingCard from "./AuthorBookListingCard";
 
 export default function AuthorListingsContainer({ authorIdList }) {
   return (
-    <div className="ui cards">
-      <h1>
+    <div class="ui relaxed divided list">
+      <ol>
         {authorIdList?.books?.map((book) => (
-          <AuthorBookListingCard book={book}/>
+          <AuthorBookListingCard book={book} />
         ))}
-      </h1>
+      </ol>
     </div>
   );
 }

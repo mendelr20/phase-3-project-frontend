@@ -36,7 +36,8 @@ export default function NewBook({ authorList }) {
     setNewAuthorName(event.target.value);
   }
 
-  function handleSubmit() {
+  function handleSubmit(e) {
+    e.preventDefault();
     if (isNewAuthor) {
       // Make a POST request to create a new author
       fetch("http://localhost:9292/authors", {
@@ -68,7 +69,7 @@ export default function NewBook({ authorList }) {
           })
             .then((response) => response.json())
             .then((data) => {
-              alert("Book created successfully!");
+              debugger;
               history.push("/Books");
               console.log(data);
             });
@@ -91,7 +92,6 @@ export default function NewBook({ authorList }) {
       })
         .then((response) => response.json())
         .then((data) => {
-          alert("Book created successfully!");
           history.push("/Books");
           console.log(data);
         });
@@ -113,7 +113,7 @@ export default function NewBook({ authorList }) {
               value={bookName}
             />
           </div>
-          <div class="required inline field">
+          <div class="inline field">
             <label>Series name</label>
             <input
               type="text"
