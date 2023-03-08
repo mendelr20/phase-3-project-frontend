@@ -7,7 +7,7 @@ export default function AuthorBookListingCard({ book }) {
         <i class="large book middle aligned icon"></i>
         <div class="content">
           <h1 class="header">{book.name}</h1>
-          <div class="description">{book.series}</div>
+          <div class="description">Series: {book.series}</div>
           <div class="description">Notes: {book.notes}</div>
         </div>
       </div>
