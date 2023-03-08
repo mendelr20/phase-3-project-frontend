@@ -50,7 +50,6 @@ export default function BookListingCard({
       .then((r) => r.json())
       .then((updatedBook) => {
         updateBookCallback(updatedBook);
-        // console.log(updatedBook)
       });
   }
 
@@ -61,7 +60,7 @@ export default function BookListingCard({
   function handleEdit() {
     handleEditClick(book);
   }
-  console.log(book)
+
   return (
     <div>
       <div className="ui card" key={book.id}>

@@ -43,7 +43,6 @@ export default function BookListingsContainer({ bookList, deleteCallback, update
     setNote(book.notes);
     setIsEditing(true);
     setBookId(book.id);
-    console.log(readByMendel)
   }
 
   function handleCancelClick() {

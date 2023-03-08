@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
-export default function NewBook({ authorList }) {
+export default function NewBook({ authorList, addBook }) {
   const [bookName, setBookName] = useState("");
   const [seriesName, setSeriesName] = useState("");
   const [isNewAuthor, setIsNewAuthor] = useState(false);
@@ -49,6 +49,7 @@ export default function NewBook({ authorList }) {
       })
         .then((response) => response.json())
         .then((data) => {
+          console.log(data)
           // Set the newly created author's ID as the selected author ID
           setSelectedAuthor(data.id);
 
@@ -70,6 +71,8 @@ export default function NewBook({ authorList }) {
             .then((response) => response.json())
             .then((data) => {
             
+            
+              addBook(data)
               history.push("/Books");
               console.log(data);
             });
@@ -92,8 +95,9 @@ export default function NewBook({ authorList }) {
       })
         .then((response) => response.json())
         .then((data) => {
+          addBook(data)
           history.push("/Books");
-          console.log(data);
+          
         });
     }
   }
