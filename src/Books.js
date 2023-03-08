@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import BookListingsContainer from "./BookListingsContainer";
 
-export default function Books({ bookList, deleteCallback }) {
+export default function Books({ bookList, deleteCallback, updateCallback, updateBookCallback }) {
   return (
     <div>
       <button class="ui basic button">
@@ -14,6 +14,8 @@ export default function Books({ bookList, deleteCallback }) {
       <BookListingsContainer
         bookList={bookList}
         deleteCallback={deleteCallback}
+        updateCallback={updateCallback}
+        updateBookCallback={updateBookCallback}
       />
     </div>
   );

@@ -69,7 +69,6 @@ export default function NewBook({ authorList }) {
           })
             .then((response) => response.json())
             .then((data) => {
-              debugger;
               history.push("/Books");
               console.log(data);
             });

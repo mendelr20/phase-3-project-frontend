@@ -56,6 +56,19 @@ export default function App() {
     setAuthorId(newAuthorId);
   }
 
+  function handleUpdateBook(updatedBook) {
+    setBookList((bookList) =>
+      bookList.map((book) => (book.id === updatedBook.id ? updatedBook : book))
+    );
+  }
+
+  function updateBookCallback(updatedBook) {
+    setBookList((bookList) =>
+      bookList.map((book) => (book.id === updatedBook.id ? updatedBook : book))
+    );
+  }
+  
+
   return (
     <div className="App">
       <Header />
@@ -65,7 +78,7 @@ export default function App() {
           <About />
         </Route>
         <Route exact path="/Books">
-          <Books bookList={bookList} deleteCallback={deleteCallback} />
+          <Books bookList={bookList} deleteCallback={deleteCallback} updateCallback={handleUpdateBook} updateBookCallback={updateBookCallback}/>
         </Route>
         <Route exact path="/NewBook">
           <NewBook addBook={addBook} authorList={authorList} />

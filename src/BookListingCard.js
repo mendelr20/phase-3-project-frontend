@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 
-export default function BookListingCard({ book, deleteCallback }) {
+export default function BookListingCard({
+  book,
+  deleteCallback,
+  handleEditClick,
+  updateBookCallback,
+}) {
   const [mendelCheckBox, setMendelChecked] = useState(book.read_by_mendel);
   const [shainaCheckBox, setShainaChecked] = useState(book.read_by_shaina);
 
@@ -15,12 +20,17 @@ export default function BookListingCard({ book, deleteCallback }) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        name: book.name,
+        series: book.series,
+        notes: book.notes,
         read_by_mendel: newCheckedState,
         read_by_shaina: shainaCheckBox,
       }),
     })
       .then((r) => r.json())
-      .then((updatedMessage) => console.log(updatedMessage));
+      .then((updatedBook) => {
+        updateBookCallback(updatedBook);
+      });
   }
 
   function handleShainaCheckboxChange(event) {
@@ -33,16 +43,25 @@ export default function BookListingCard({ book, deleteCallback }) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        name: book.name,
+        series: book.series,
+        notes: book.notes,
         read_by_mendel: mendelCheckBox,
         read_by_shaina: newCheckedState,
       }),
     })
       .then((r) => r.json())
-      .then((updatedMessage) => console.log(updatedMessage));
+      .then((updatedBook) => {
+        updateBookCallback(updatedBook);
+      });
   }
 
   function handleDelete() {
     deleteCallback(book.id);
+  }
+
+  function handleEdit() {
+    handleEditClick(book);
   }
 
   return (
@@ -52,9 +71,9 @@ export default function BookListingCard({ book, deleteCallback }) {
           <a class="header">{book.name}</a>
           <div class="description">Series: {book.series}</div>
           Author:{" "}
-          <NavLink to={`/authors/${book.author.id}`}>
+          {/* <NavLink to={`/authors/${book.author.id}`}>
             {book.author.name}
-          </NavLink>
+          </NavLink> */}
           <div>Notes: {book.notes}</div>
           <div>
             Read by Mendel:{" "}
@@ -73,9 +92,14 @@ export default function BookListingCard({ book, deleteCallback }) {
             />
           </div>
         </div>
-        <button onClick={handleDelete} class="ui icon button">
-          <i class="trash icon"></i>
-        </button>
+        <div>
+          <button onClick={handleDelete} class="ui icon button">
+            <i class="trash icon"></i>
+          </button>
+          <button onClick={handleEdit} class="ui icon button">
+            <i class="edit icon"></i>
+          </button>
+        </div>
       </div>
     </div>
   );
