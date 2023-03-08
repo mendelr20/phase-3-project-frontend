@@ -69,6 +69,7 @@ export default function NewBook({ authorList }) {
           })
             .then((response) => response.json())
             .then((data) => {
+            
               history.push("/Books");
               console.log(data);
             });
@@ -102,8 +103,8 @@ export default function NewBook({ authorList }) {
       <h1>New Book Form</h1>
       <h2>Add a Book that is not on the list to this application</h2>
       <form onSubmit={handleSubmit}>
-        <div class="ui form">
-          <div class="required inline field">
+        <div className="ui form">
+          <div className="required inline field">
             <label>Book name</label>
             <input
               type="text"
@@ -112,7 +113,7 @@ export default function NewBook({ authorList }) {
               value={bookName}
             />
           </div>
-          <div class="inline field">
+          <div className="inline field">
             <label>Series name</label>
             <input
               type="text"
@@ -121,16 +122,16 @@ export default function NewBook({ authorList }) {
               value={seriesName}
             />
           </div>
-          <div class="required inline field">
+          <div className="required inline field">
             <label>Select Author:</label>
-            <select class="ui dropdown" onChange={handleAuthorSelection}>
+            <select className="ui dropdown" onChange={handleAuthorSelection}>
               <option value="">Select A Option</option>
               {authorOptions}
               <option value="create_new">Create a new author</option>
             </select>
           </div>
           {isNewAuthor && (
-            <div class="required inline field">
+            <div className="required inline field">
               <label>New Author Name:</label>
               <input
                 type="text"
@@ -139,7 +140,7 @@ export default function NewBook({ authorList }) {
               />
             </div>
           )}
-          <div class="inline field">
+          <div className="inline field">
             <label>Notes</label>
             <input
               type="text"
@@ -148,8 +149,8 @@ export default function NewBook({ authorList }) {
               value={note}
             />
           </div>
-          <div class="inline field">
-            <div class="ui checkbox">
+          <div className="inline field">
+            <div className="ui checkbox">
               <input
                 type="checkbox"
                 name="example"
@@ -158,8 +159,8 @@ export default function NewBook({ authorList }) {
               <label>Read By Mendel</label>
             </div>
           </div>
-          <div class="inline field">
-            <div class="ui checkbox">
+          <div className="inline field">
+            <div className="ui checkbox">
               <input
                 type="checkbox"
                 name="example"
@@ -168,7 +169,7 @@ export default function NewBook({ authorList }) {
               <label>Read By Shaina</label>
             </div>
           </div>
-          <button class="ui button" type="submit">
+          <button className="ui button" type="submit">
             Submit
           </button>
         </div>

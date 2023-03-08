@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState} from "react";
 import { NavLink } from "react-router-dom";
 
 export default function BookListingCard({
@@ -13,18 +13,16 @@ export default function BookListingCard({
   function handleMendelCheckboxChange(event) {
     const newCheckedState = event.target.checked;
     setMendelChecked(newCheckedState);
-    setShainaChecked(shainaCheckBox);
     fetch(`http://localhost:9292/books/${book.id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name: book.name,
-        series: book.series,
-        notes: book.notes,
-        read_by_mendel: newCheckedState,
-        read_by_shaina: shainaCheckBox,
+        book: {
+          read_by_mendel: newCheckedState,
+          read_by_shaina: shainaCheckBox,
+        }
       }),
     })
       .then((r) => r.json())
@@ -43,16 +41,16 @@ export default function BookListingCard({
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name: book.name,
-        series: book.series,
-        notes: book.notes,
-        read_by_mendel: mendelCheckBox,
-        read_by_shaina: newCheckedState,
+        book: {
+          read_by_mendel: mendelCheckBox,
+          read_by_shaina: newCheckedState,
+        }
       }),
     })
       .then((r) => r.json())
       .then((updatedBook) => {
         updateBookCallback(updatedBook);
+        // console.log(updatedBook)
       });
   }
 
@@ -63,17 +61,17 @@ export default function BookListingCard({
   function handleEdit() {
     handleEditClick(book);
   }
-
+  console.log(book)
   return (
     <div>
-      <div class="ui card" key={book.id}>
-        <div class="content">
-          <a class="header">{book.name}</a>
-          <div class="description">Series: {book.series}</div>
+      <div className="ui card" key={book.id}>
+        <div className="content">
+          <h1 className="header">{book.name}</h1>
+          <div className="description">Series: {book.series}</div>
           Author:{" "}
-          {/* <NavLink to={`/authors/${book.author.id}`}>
+          <NavLink to={`/authors/${book.author.id}`}>
             {book.author.name}
-          </NavLink> */}
+          </NavLink>
           <div>Notes: {book.notes}</div>
           <div>
             Read by Mendel:{" "}
@@ -93,11 +91,11 @@ export default function BookListingCard({
           </div>
         </div>
         <div>
-          <button onClick={handleDelete} class="ui icon button">
-            <i class="trash icon"></i>
+          <button onClick={handleDelete} className="ui icon button">
+            <i className="trash icon"></i>
           </button>
-          <button onClick={handleEdit} class="ui icon button">
-            <i class="edit icon"></i>
+          <button onClick={handleEdit} className="ui icon button">
+            <i className="edit icon"></i>
           </button>
         </div>
       </div>

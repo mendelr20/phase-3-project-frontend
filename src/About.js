@@ -4,11 +4,11 @@ export default function About() {
   return (
     <div>
       <h1>
-        <i class="info circle icon"></i>
+        <i className="info circle icon"></i>
         About
       </h1>
       <h2>
-        <div class="ui floating message">
+        <div className="ui floating message">
           I am thrilled to introduce my phase 3 web application, designed as a
           tribute to my beloved wife Shaina, who has a penchant for reading and
           being organized. This app has been specifically created to keep track

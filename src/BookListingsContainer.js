@@ -19,11 +19,13 @@ export default function BookListingsContainer({ bookList, deleteCallback, update
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name: bookName,
-        series: seriesName,
-        notes: note,
-        read_by_mendel: readByMendel,
-        read_by_shaina: readByShaina,
+        book: {
+          name: bookName,
+          series: seriesName,
+          notes: note,
+          read_by_mendel: readByMendel,
+          read_by_shaina: readByShaina,
+        }
       }),
     })
       .then((r) => r.json())
@@ -34,7 +36,6 @@ export default function BookListingsContainer({ bookList, deleteCallback, update
   }
 
   function handleEditClick(book) {
-    console.log(book)
     setBookName(book.name);
     setSeriesName(book.series);
     setReadByMendel(book.read_by_mendel);
@@ -53,8 +54,8 @@ export default function BookListingsContainer({ bookList, deleteCallback, update
     <div>
       {isEditing ? (
         <form onSubmit={handleSubmit}>
-          <div class="ui form">
-            <div class="required inline field">
+          <div className="ui form">
+            <div className="required inline field">
               <label>Book name</label>
               <input
                 type="text"
@@ -63,7 +64,7 @@ export default function BookListingsContainer({ bookList, deleteCallback, update
                 value={bookName}
               />
             </div>
-            <div class="inline field">
+            <div className="inline field">
               <label>Series name</label>
               <input
                 type="text"
@@ -72,7 +73,7 @@ export default function BookListingsContainer({ bookList, deleteCallback, update
                 value={seriesName}
               />
             </div>
-            <div class="inline field">
+            <div className="inline field">
               <label>Notes</label>
               <input
                 type="text"
@@ -81,8 +82,8 @@ export default function BookListingsContainer({ bookList, deleteCallback, update
                 value={note}
               />
             </div>
-            <div class="inline field">
-              <div class="ui checkbox">
+            <div className="inline field">
+              <div className="ui checkbox">
                 <input
                   checked={readByMendel}
                   type="checkbox"
@@ -92,8 +93,8 @@ export default function BookListingsContainer({ bookList, deleteCallback, update
                 <label>Read By Mendel</label>
               </div>
             </div>
-            <div class="inline field">
-              <div class="ui checkbox">
+            <div className="inline field">
+              <div className="ui checkbox">
                 <input
                   checked={readByShaina}
                   type="checkbox"
@@ -111,6 +112,7 @@ export default function BookListingsContainer({ bookList, deleteCallback, update
         <div className="ui cards">
           {bookList.map((book) => (
             <BookListingCard
+              key={book.id}
               book={book}
               deleteCallback={deleteCallback}
               handleEditClick={handleEditClick}

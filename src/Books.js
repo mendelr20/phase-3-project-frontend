@@ -5,9 +5,9 @@ import BookListingsContainer from "./BookListingsContainer";
 export default function Books({ bookList, deleteCallback, updateCallback, updateBookCallback }) {
   return (
     <div>
-      <button class="ui basic button">
-        <i class="add icon"></i>
-        <i class="book icon"></i>
+      <button className="ui basic button">
+        <i className="add icon"></i>
+        <i className="book icon"></i>
         <NavLink to="/NewBook">New Book</NavLink>
       </button>
       <p></p>

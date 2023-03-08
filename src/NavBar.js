@@ -3,28 +3,28 @@ import { NavLink } from "react-router-dom";
 
 export default function NavBar() {
   return (
-    <div class="ui three item menu">
-      <div class="ui animated button" tabindex="0">
-        <div class="visible content">
-          <i class="home icon"></i>
+    <div className="ui three item menu">
+      <div className="ui animated button" tabIndex="0">
+        <div className="visible content">
+          <i className="home icon"></i>
         </div>
-        <div class="hidden content">
+        <div className="hidden content">
           <NavLink to="/">Home</NavLink>
         </div>
       </div>
-      <div class="ui vertical animated button" tabindex="0">
-        <div class="visible content">
-          <i class="info circle icon"></i>
+      <div className="ui vertical animated button" tabIndex="0">
+        <div className="visible content">
+          <i className="info circle icon"></i>
         </div>
-        <div class="hidden content">
+        <div className="hidden content">
           <NavLink to="/About">About</NavLink>
         </div>
       </div>
-      <div class="ui animated fade button" tabindex="0">
-        <div class="visible content">
-          <i class="book icon"></i>
+      <div className="ui animated fade button" tabIndex="0">
+        <div className="visible content">
+          <i className="book icon"></i>
         </div>
-        <div class="hidden content">
+        <div className="hidden content">
           <NavLink to="/Books">Books</NavLink>
         </div>
       </div>
