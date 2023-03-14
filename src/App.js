@@ -12,8 +12,6 @@ import Authors from "./Authors";
 
 export default function App() {
   const [bookList, setBookList] = useState([]);
-  const [authorId, setAuthorId] = useState(null);
-  const [authorIdList, setAuthorIdList] = useState([]);
   const [authorList, setAuthorList] = useState([]);
 
   useEffect(() => {
@@ -28,14 +26,6 @@ export default function App() {
       .then((data) => setAuthorList(data));
   }, []);
 
-  useEffect(() => {
-    if (authorId) {
-      fetch(`http://localhost:9292/authors/${authorId}`)
-        .then((res) => res.json())
-        .then((data) => setAuthorIdList(data));
-    }
-  }, [authorId]);
-
   function addBook(book) {
     // Check if the author of the book already exists in the authorList
     const existingAuthor = authorList.find(
@@ -48,7 +38,6 @@ export default function App() {
       // Add the book to the existing author's books array
       const updatedAuthorList = authorList.map((author) => {
         if (author.id === book.author_id) {
-          console.log(author)
           return {
             ...author,
             books: [...author.books, book],
@@ -75,7 +64,6 @@ export default function App() {
   }
   
   function deleteCallback(id) {
-    console.log(id);
     fetch(`http://localhost:9292/books/${id}`, {
       method: "DELETE",
     })
@@ -84,10 +72,6 @@ export default function App() {
         const filteredBooks = bookList.filter((book) => book.id !== id);
         setBookList(filteredBooks);
       });
-  }
-
-  function onAuthorIdChange(newAuthorId) {
-    setAuthorId(newAuthorId);
   }
 
   function handleUpdateBook(updatedBook) {
@@ -112,8 +96,7 @@ export default function App() {
         </Route>
         <Route exact path="/authors/:authorId">
           <Authors
-            onAuthorIdChange={onAuthorIdChange}
-            authorIdList={authorIdList}
+            authorList={authorList}
           />
         </Route>
         <Route exact path="/">

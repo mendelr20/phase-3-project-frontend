@@ -11,7 +11,6 @@ export default function BookListingsContainer({ bookList, deleteCallback, update
   
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(bookId);
     fetch(`http://localhost:9292/books/${bookId}`, {
       method: "PATCH",
       headers: {
