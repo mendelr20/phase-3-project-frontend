@@ -6,8 +6,7 @@ export default function BookListingsContainer({ bookList, deleteCallback, update
   const [bookName, setBookName] = useState("");
   const [seriesName, setSeriesName] = useState("");
   const [note, setNote] = useState("");
-  const [readByMendel, setReadByMendel] = useState(false);
-  const [readByShaina, setReadByShaina] = useState(false);
+  const [read, setRead] = useState(false);
   const [bookId, setBookId] = useState(0);
   
   function handleSubmit(e) {
@@ -23,8 +22,7 @@ export default function BookListingsContainer({ bookList, deleteCallback, update
           name: bookName,
           series: seriesName,
           notes: note,
-          read_by_mendel: readByMendel,
-          read_by_shaina: readByShaina,
+          read: read,
         }
       }),
     })
@@ -38,8 +36,7 @@ export default function BookListingsContainer({ bookList, deleteCallback, update
   function handleEditClick(book) {
     setBookName(book.name);
     setSeriesName(book.series);
-    setReadByMendel(book.read_by_mendel);
-    setReadByShaina(book.read_by_shaina);
+    setRead(book.read);
     setNote(book.notes);
     setIsEditing(true);
     setBookId(book.id);
@@ -84,23 +81,12 @@ export default function BookListingsContainer({ bookList, deleteCallback, update
             <div className="inline field">
               <div className="ui checkbox">
                 <input
-                  checked={readByMendel}
+                  checked={read}
                   type="checkbox"
                   name="example"
-                  onChange={(e) => setReadByMendel(readByMendel ? false : true)}
+                  onChange={(e) => setRead( read ? false : true)}
                 />
-                <label>Read By Mendel</label>
-              </div>
-            </div>
-            <div className="inline field">
-              <div className="ui checkbox">
-                <input
-                  checked={readByShaina}
-                  type="checkbox"
-                  name="example"
-                  onChange={(e) => setReadByShaina(readByShaina ? false : true)}
-                />
-                <label>Read By Shaina</label>
+                <label>Read</label>
               </div>
             </div>
             <button type="submit">Save</button>
