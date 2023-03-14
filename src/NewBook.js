@@ -6,11 +6,10 @@ export default function NewBook({ authorList, addBook }) {
   const [seriesName, setSeriesName] = useState("");
   const [isNewAuthor, setIsNewAuthor] = useState(false);
   const [newAuthorName, setNewAuthorName] = useState("");
-  const [selectedAuthor, setSelectedAuthor] = useState(); // just author_id - if want to create a author need to have a option to create a author to create a author
+  const [selectedAuthor, setSelectedAuthor] = useState(); // just author_id - if want to create a author need to have a option to create a author
   const [note, setNote] = useState("");
   const [read, setRead] = useState(false);
   let history = useHistory();
-  // add link to author name to go to author page with all the books and include all books for the author if add book to author you have to add state for books and authors
 
   function handleAuthorSelection(event) {
     const selectedOption = event.target.value;
@@ -35,6 +34,22 @@ export default function NewBook({ authorList, addBook }) {
     setNewAuthorName(event.target.value);
   }
 
+  function createBookWithAuthorId(authorId) {
+    return fetch("http://localhost:9292/books", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: bookName,
+        series: seriesName,
+        author_id: authorId,
+        notes: note,
+        read: read,
+      }),
+    }).then((response) => response.json());
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
     if (isNewAuthor) {
@@ -48,48 +63,17 @@ export default function NewBook({ authorList, addBook }) {
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log(data)
-          // Set the newly created author's ID as the selected author ID
           setSelectedAuthor(data.id);
-
-          // Make a POST request to create a new book with the selected author ID
-          fetch("http://localhost:9292/books", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              name: bookName,
-              series: seriesName,
-              author_id: data.id,
-              notes: note,
-              read: read
-            }),
-          })
-            .then((response) => response.json())
-            .then((data) => {
-              addBook(data)
-              history.push("/Books");
-            });
+          return createBookWithAuthorId(data.id);
+        })
+        .then((data) => {
+          addBook(data);
+          history.push("/Books");
         });
     } else {
-      // Make a POST request to create a new book with the selected author ID
-      fetch("http://localhost:9292/books", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: bookName,
-          series: seriesName,
-          author_id: selectedAuthor,
-          notes: note,
-          read: read
-        }),
-      })
-        .then((response) => response.json())
+      createBookWithAuthorId(selectedAuthor)
         .then((data) => {
-          addBook(data)
+          addBook(data);
           history.push("/Books");
         });
     }
