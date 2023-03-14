@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import BookListingCard from "./BookListingCard";
 
-export default function BookListingsContainer({ bookList, deleteCallback, updateCallback, updateBookCallback }) {
+export default function BookListingsContainer({ bookList, deleteCallback, updateCallback}) {
   const [isEditing, setIsEditing] = useState(false);
   const [bookName, setBookName] = useState("");
   const [seriesName, setSeriesName] = useState("");
@@ -115,7 +115,6 @@ export default function BookListingsContainer({ bookList, deleteCallback, update
               book={book}
               deleteCallback={deleteCallback}
               handleEditClick={handleEditClick}
-              updateBookCallback={updateBookCallback}
             />
           ))}
         </div>
