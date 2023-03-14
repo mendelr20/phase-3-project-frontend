@@ -8,8 +8,7 @@ export default function NewBook({ authorList, addBook }) {
   const [newAuthorName, setNewAuthorName] = useState("");
   const [selectedAuthor, setSelectedAuthor] = useState(); // just author_id - if want to create a author need to have a option to create a author to create a author
   const [note, setNote] = useState("");
-  const [readByMendel, setReadByMendel] = useState(false);
-  const [readByShaina, setReadByShaina] = useState(false);
+  const [read, setRead] = useState(false);
   let history = useHistory();
   // add link to author name to go to author page with all the books and include all books for the author if add book to author you have to add state for books and authors
 
@@ -64,17 +63,13 @@ export default function NewBook({ authorList, addBook }) {
               series: seriesName,
               author_id: data.id,
               notes: note,
-              read_by_mendel: readByMendel,
-              read_by_shaina: readByShaina,
+              read: read
             }),
           })
             .then((response) => response.json())
             .then((data) => {
-            
-            
               addBook(data)
               history.push("/Books");
-              console.log(data);
             });
         });
     } else {
@@ -89,15 +84,13 @@ export default function NewBook({ authorList, addBook }) {
           series: seriesName,
           author_id: selectedAuthor,
           notes: note,
-          read_by_mendel: readByMendel,
-          read_by_shaina: readByShaina,
+          read: read
         }),
       })
         .then((response) => response.json())
         .then((data) => {
           addBook(data)
           history.push("/Books");
-          
         });
     }
   }
@@ -158,19 +151,9 @@ export default function NewBook({ authorList, addBook }) {
               <input
                 type="checkbox"
                 name="example"
-                onChange={(e) => setReadByMendel(readByMendel ? false : true)}
+                onChange={(e) => setRead(read ? false : true)}
               />
-              <label>Read By Mendel</label>
-            </div>
-          </div>
-          <div className="inline field">
-            <div className="ui checkbox">
-              <input
-                type="checkbox"
-                name="example"
-                onChange={(e) => setReadByShaina(readByShaina ? false : true)}
-              />
-              <label>Read By Shaina</label>
+              <label>Read</label>
             </div>
           </div>
           <button className="ui button" type="submit">
@@ -182,4 +165,3 @@ export default function NewBook({ authorList, addBook }) {
   );
 }
 
-//

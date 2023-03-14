@@ -36,6 +36,44 @@ export default function App() {
     }
   }, [authorId]);
 
+  function addBook(book) {
+    // Check if the author of the book already exists in the authorList
+    const existingAuthor = authorList.find(
+      (author) => author.id === book.author_id
+    );
+    
+    setBookList([...bookList, book]);
+  
+    if (existingAuthor) {
+      // Add the book to the existing author's books array
+      const updatedAuthorList = authorList.map((author) => {
+        if (author.id === book.author_id) {
+          console.log(author)
+          return {
+            ...author,
+            books: [...author.books, book],
+          };
+        }
+        return author;
+      });
+  
+      // Update the authorList state
+      setAuthorList(updatedAuthorList);
+    } else {
+      // Add the new author to the authorList with the newly created book
+      const newAuthor = {
+        id: book.author_id,
+        name: book.author.name,
+        books: [book],
+      };
+  
+      const updatedAuthorList = [...authorList, newAuthor];
+  
+      // Update the authorList state
+      setAuthorList(updatedAuthorList);
+    }
+  }
+  
   function deleteCallback(id) {
     console.log(id);
     fetch(`http://localhost:9292/books/${id}`, {
@@ -46,10 +84,6 @@ export default function App() {
         const filteredBooks = bookList.filter((book) => book.id !== id);
         setBookList(filteredBooks);
       });
-  }
-
-  function addBook(newBook) {
-    setBookList([...bookList, newBook]);
   }
 
   function onAuthorIdChange(newAuthorId) {
